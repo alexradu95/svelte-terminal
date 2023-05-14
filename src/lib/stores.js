@@ -18,6 +18,9 @@ history.subscribe((newHistory) => {
 	}
 })
 
+// Create a writable Svelte store for our command line data
+export const lineData = writable([])
+
 // Create a readable Svelte store for the current date and time
 // This store updates every second
 export const dateTime = readable(getCurrentTime(), function start(set) {

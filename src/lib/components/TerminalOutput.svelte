@@ -1,11 +1,9 @@
-<!-- TerminalOutput.svelte -->
 <script>
-	import UserPrompt from "./UserPrompt.svelte"
-    export let lineData = []
+    import UserPrompt from "./UserPrompt.svelte"
+    import { lineData } from '../stores'; // import the store
 </script>
 
-<pre class="output">Type 'help' to learn more.</pre>
-{#each lineData as line, i (i)}
+{#each $lineData as line, i (i)} <!-- use $lineData to access the current value of the store -->
     <span>
         <UserPrompt></UserPrompt>
         <pre class="input-old">{line.command}</pre>
@@ -21,7 +19,6 @@
 {/each}
 
 <style>
-
     .input-old {
         background: transparent;
         border: none;
@@ -31,5 +28,4 @@
         color: var(--color-text-primary);
         outline: none;
     }
-    
 </style>
