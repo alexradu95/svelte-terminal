@@ -1,37 +1,13 @@
-/*css reset */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-
 :root {
-	--color-bg: #100D23;
-	/* prompt and input */
-	--color-text-primary: #00FF9C; 
-	--color-text-secondary: #c592ff;
-	--color-output: #c592ff;
-	--color-prompt: #00FF9C; 
-	--color-input: #00FF9C;
-	--color-link: #dddddd;
-	--color-link-border: #d0d0d0;
+    /* Variables for color schemes used across the application */
+	--color-bg: #100D23; /* background color */
+	--color-text-primary: #00FF9C; /* primary text color, used for input and prompt */
+	--color-text-secondary: #c592ff; /* secondary text color, used for clock */
+	--color-output: #c592ff; /* color for output text */
+	--color-prompt: #00FF9C; /* color for prompt */
+	--color-link: #dddddd; /* color for links */
+	--color-link-border: #d0d0d0; /* border color for links */
 }
-
 
 body {
 	position: absolute;
@@ -47,17 +23,20 @@ a {
 	border-bottom: 1px solid var(--color-link-border);
 }
 
+/* Custom selection color */
 ::selection {
 	color: var(--color-bg);
-    background: var(--color-input);
+    background: var(--color-prompt);
 }
 
+/* Styles for preformatted text */
 pre {
 	margin: 0;
     outline: none;
-	color: var(--color-input);
+	color: var(--color-prompt);
 }
 
+/* Styles for output text */
 .output {
 	color: var(--color-output);
 }
@@ -74,6 +53,7 @@ pre {
 	max-height: 100%;
 }
 
+/* Styles for prompt text */
 .prompt {
 	color: var(--color-prompt);
     font-family: monospace;
@@ -92,36 +72,26 @@ input, .input-old {
 }
 
 .terminal-container {
-	padding: 12pt;
 	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0 auto; /* shorthand for centering the container */
 	height: 80%;
 	max-height: 80%;
 	background-color: var(--color-bg);
 	opacity: .9 ;
 	border-radius: 1px;
-	/*center it vertically*/
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
 }
 
+/* Styles for the clock */
 .clock {
 	font-family: monospace;
 	color: var(--color-text-secondary);
 	text-align: right;
 }
 
+/* Ensuring that span inside .input does not overflow its parent */
 .input > span {
 	max-width: 100%;
-}
-
-::-webkit-scrollbar{width:6px!important;height:6px!important;}
-body::-webkit-scrollbar{width:10px!important;height:6px!important;}
-
-::-webkit-scrollbar-track{background:rgba(255,255,255,0)!important;border-radius:8px!important;}
-
-::-webkit-scrollbar-thumb{background-color:rgba(0, 0, 0, .5) !important;min-height:50px;border-radius:5px!important;
-border: 1px solid rgba(255, 255, 255, .2);
 }
