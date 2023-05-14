@@ -19,3 +19,17 @@
         {/if}
     </span>
 {/each}
+
+<style>
+
+    .input-old {
+        background: transparent;
+        border: none;
+        display: inline;
+        font-family: monospace;
+        white-space: nowrap;
+        color: var(--color-text-primary);
+        outline: none;
+    }
+    
+</style>

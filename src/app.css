@@ -53,15 +53,7 @@ pre {
 	max-height: 100%;
 }
 
-/* Styles for prompt text */
-.prompt {
-	color: var(--color-prompt);
-    font-family: monospace;
-    display: inline;
-	white-space: nowrap;
-}
-
-input, .input-old {
+input {
 	background: transparent;
   	border: none;
   	display: inline;
