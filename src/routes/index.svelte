@@ -3,9 +3,10 @@
     import { onMount } from 'svelte'
     import { handle } from '$lib/bin'
     import { keypress } from '$lib/actions'
-    import { dateTime, user, machine, history } from '$lib/stores'
+    import { history } from '$lib/stores'
     import UserPrompt from '../lib/components/UserPrompt.svelte'
     import TerminalOutput from '../lib/components/TerminalOutput.svelte'
+	import DateTimeWidget from '../lib/components/DateTimeWidget.svelte'
 
     let lineData = []
     let histIndex = $history.length
@@ -51,7 +52,7 @@
 </svelte:head>
 
 <div class="terminal" on:click={() => termInput.focus()}>
-    <TerminalOutput {lineData} {user} {machine} />
+    <TerminalOutput {lineData} />
     <UserPrompt></UserPrompt>    
     <input
         class="input"
@@ -64,4 +65,4 @@
         on:arrowdown|preventDefault={arrowDown}
     />
 </div>
-<div class="clock">{$dateTime}</div>
+<DateTimeWidget></DateTimeWidget>

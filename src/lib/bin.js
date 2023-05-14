@@ -1,99 +1,54 @@
+// Import command handlers
+import { echo } from './commands/echo'
+import { help } from './commands/help'
+import { ls } from './commands/ls'
+import { local } from './commands/local'
+
+// Import bookmarks
 import { bookmarks } from './bookmarks'
-import { machine, user } from './stores'
 
-function setUser(name) {
-	if (name === '') return 'usage: user [newname]'
-
-	user.set(name)
-	return `Set user to ${name}.`
-}
-
-function setMachineName(name) {
-	if (name === '') return 'usage: machine [newname]'
-
-	machine.set(name)
-	return `Set machine name to ${name}.`
-}
-
-function print() {
-	const args = [...arguments]
-	return args.map((text) => `<pre class="output">${text}</pre>`)
-}
-
-function printWithColor(text, color) {
-	return `<pre class="output" style="color: ${color ?? 'inherit'};">${text}</pre>`
-}
-
-function ls() {
-	let output = []
-	const renderColor = '#00FF9C'
-
-	for (let i of Object.keys(bookmarks)) {
-		output.push(printWithColor(i, renderColor))
-		let k = Object.keys(bookmarks[i])
-		output.push(print(`> ${k.join(' > ')}`))
-	}
-
-	return output.flat()
-}
-
-function help() {
-	return print(
-		'You found my terminal!',
-		"This project serves as my browser's homepage. The bookmarks are 'commands' that you can type in the terminal.",
-		"Type 'ls' to see all the commands.",
-		"Type 'src' to see the code for this project on GitHub."
-	)
-}
-
-const local = (args) => {
-	if (args.length === 0) return 'usage: local [port] [flag]'
-
-	const [port, flag] = args.trim().split(' ')
-	let url = `http://localhost:${port}000`
-
-	if (flag === '-a') url += '/admin'
-	else if (flag === '-p') url += '/api'
-
-	window.location.href = url
-	return url
-}
-
+// Define command actions
+// Each command has its own handler imported from a separate file
 const actions = {
-	echo: (input) => input,
-	user: setUser,
-	machine: setMachineName,
-	local,
-	help,
-	ls,
+	echo,   // Echo command just echoes the input back to the user
+	local,  // Local command navigates to a local URL
+	help,   // Help command provides some general help information
+	ls,     // LS command lists available bookmarks
 }
 
+// Helper function to get URL associated with a command
+// If the command is found in the bookmarks, return the URL
+// If the command is not found in the bookmarks, return null
+const getURL = (command) => {
+	for (const key in bookmarks)
+		if (bookmarks[key][command]) return bookmarks[key][command]
+	return null
+}
+
+// Helper function to handle URL navigation
+// If the openInNewTab flag is true, open the URL in a new tab
+// Otherwise, navigate to the URL in the current tab
+const handleURL = (url, openInNewTab) => {
+	if (openInNewTab) window.open(url, '_blank')
+	else window.location.href = url
+}
+
+// Main command handler
+// This function takes in a text input, splits it into command and arguments,
+// and calls the appropriate handler based on the command.
+// If the command is not found in the defined actions, it tries to get a URL from bookmarks.
+// If a URL is found, it navigates to the URL.
+// If no URL is found, it returns an error message.
 export const handle = (text) => {
 	const [command, ...args] = text.trim().split(' ')
-	if (actions[command]) {
-		const executor = actions[command]
-		const output = executor(args.join(' '))
-		return output
+	const executor = actions[command]
+
+	if (executor) {
+		return executor(args.join(' '))
 	} else {
-		// check for URL
-		let url
-
-		// subreddit or reddit user
-		if (command.slice(0, 3) === '/r/' || command.slice(0, 3) === '/u/')
-			url = `https://www.reddit.com${command}`
-
-		// bookmarks
-		Object.keys(bookmarks).forEach(function (key) {
-			if (bookmarks[key][command]) url = bookmarks[key][command]
-		})
-
+		const url = getURL(command)
 		if (url) {
-			if (args[0] === '-t') {
-				window.open(url, '_blank') // Open in new tab
-			} else {
-				window.location.href = url
-			}
-
+			handleURL(url, args[0] === '-t')
 			return `Loading ${url}...`
 		}
 	}

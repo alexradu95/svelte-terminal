@@ -1,9 +1,4 @@
-<!-- Prompt.svelte -->
-<script>
-    import { user, machine } from '$lib/stores'
-</script>
-
-<p class="prompt">{$user}@{$machine}:$&nbsp;</p>
+<p class="prompt">alexradu.net:</p>
 
 
 <style>

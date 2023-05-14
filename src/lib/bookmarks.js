@@ -1,34 +1,13 @@
 export const bookmarks = {
 	general: {
-		inbox: 'https://mail.google.com/',
-		cal: 'https://calendar.google.com/',
-		drive: 'https://drive.google.com/',
-		amazon: 'https://amazon.com/',
-		'amazon-jp': 'https://amazon.co.jp/',
-	},
-
-	media: {
-		yt: 'https://youtube.com/feed/subscriptions',
-		netflix: 'https://netflix.com/',
-		plex: 'https://app.plex.tv',
-	},
-
-	tech: {
-		github: 'http://github.com/',
-		speedtest: 'http://speedtest.net/',
-		mdn: 'https://developer.mozilla.org/en-US/',
-		src: 'http://github.com/josephkhawly/svelte-terminal',
-		vercel: 'https://vercel.com/',
-	},
-
-	work: {
-		notion: 'https://www.notion.so/',
-		jira: 'https://mwmdigital.atlassian.net/jira/projects?selectedProjectType=software',
-		bitbucket: 'https://bitbucket.org/',
+		website: 'https://alexradu.net/',
+		github: 'https://github.com/alexradu95/',
+		linkedIn: 'https://www.linkedin.com/in/radualexandrucosmin/',
 	},
 
 	social: {
-		twitter: 'https://twitter.com/',
-		linkedin: 'https://linkedin.com/in/josephkhawly',
+		instagram: 'https://www.instagram.com/alexradu/',
+		facebook: 'https://www.facebook.com/cicoalexandru/',
+		youtube: 'https://www.youtube.com/@AlexRadu95',
 	},
 }
